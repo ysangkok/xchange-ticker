@@ -1,0 +1,16 @@
+<ivysettings>
+	<settings defaultResolver="chain"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-public.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-shared.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-local.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-main-chain.xml"/>
+	<include url="${ivy.default.settings.dir}/ivysettings-default-chain.xml"/>
+    <resolvers>
+        <chain name="chain" dual="true">
+            <ibiblio name="sonatype" m2compatible="true" root="https://oss.sonatype.org/content/groups/public"/>
+            <ibiblio name="example" m2compatible="true" root="http://mvn.erichseifert.de/maven2"/>
+            <resolver ref="default"/>
+        </chain>
+    </resolvers>
+</ivysettings>
+
