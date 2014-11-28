@@ -27,7 +27,7 @@ fetch jars
 
     java -jar ivy-2.3.0.jar -settings ivysettings.xml -dependency com.xeiam.xchange xchange-examples 2.1.0 -retrieve "lib/[artifact]-[revision](-[classifier]).[ext]"
 
-run
+run (this will only work in zsh because of `**`)
 ---
 
     groovy -cp $(echo lib/**/*.jar | tr ' ' ':') ticker.groovy com.xeiam.xchange.coinfloor.CoinfloorExchange
