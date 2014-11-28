@@ -1,12 +1,18 @@
-wget -O ivy-2.3.0.jar "http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"
-unzip -p ivy-2.3.0.jar org/apache/ivy/core/settings/ivysettings.xml > ivysettings.xml
+fetch ivy
+---
 
-adjust ivysettings.xml:
+    wget -O ivy-2.3.0.jar "http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.3.0/ivy-2.3.0.jar"
+    unzip -p ivy-2.3.0.jar org/apache/ivy/core/settings/ivysettings.xml > ivysettings.xml
 
-adjust defaultResolver:
+adjust `ivysettings.xml`:
+---
+
+**adjust `defaultResolver`:**
+
         <settings defaultResolver="chain"/>
 
-add
+**add inside `<ivysettings>`:**
+
 
     <resolvers>
         <chain name="chain" dual="true">
@@ -16,9 +22,12 @@ add
         </chain>
     </resolvers>
 
-inside <ivysettings>
+fetch jars
+---
 
+    java -jar ivy-2.3.0.jar -settings ivysettings.xml -dependency com.xeiam.xchange xchange-examples 2.1.0 -retrieve "lib/[artifact]-[revision](-[classifier]).[ext]"
 
-java -jar ivy-2.3.0.jar -settings ivysettings.xml -dependency com.xeiam.xchange xchange-examples 2.1.0 -retrieve "lib/[artifact]-[revision](-[classifier]).[ext]"
+run
+---
 
-groovy -cp $(echo lib/**/*.jar | tr ' ' ':') ticker.groovy com.xeiam.xchange.coinfloor.CoinfloorExchange
+    groovy -cp $(echo lib/**/*.jar | tr ' ' ':') ticker.groovy com.xeiam.xchange.coinfloor.CoinfloorExchange
